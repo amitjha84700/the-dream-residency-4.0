@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Dream Residency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a href="#home" class="logo">
+    <div class="mark">D</div>
+    <div class="name"><span id="logoName">The Dream Residency</span><small>Boutique Hotel</small></div>
+  </a>
+  <nav id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#dining">Dining</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <button class="btn-book" onclick="openBookingModal()">Book Now</button>
+  </nav>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-stars">★ ★ ★ ★</div>
+    <div class="hero-eyebrow">Welcome To</div>
+    <h1 id="heroTitle">The Dream Residency</h1>
+    <p id="heroTag">A Boutique Stay of Elegance &amp; Comfort</p>
+    <button class="cta" onclick="openBookingModal()">Request a Booking</button>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="split">
+    <div id="aboutImgWrap" class="img-placeholder">The Dream Residency</div>
+    <div>
+      <div class="section-title" style="text-align:left;margin-bottom:24px;">
+        <span class="eyebrow">About Us</span>
+        <h2 id="aboutHead">A Place You'll Love To Stay</h2>
+      </div>
+      <p class="lead" id="aboutLead">"Comfort, elegance &amp; warm hospitality."</p>
+      <p id="aboutText">Loading…</p>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" class="section cream">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-title">
+      <span class="eyebrow">Accommodation</span>
+      <h2>Our Rooms &amp; Suites</h2>
+      <div class="stars">★ ★ ★ ★</div>
+    </div>
+    <div id="roomsGrid" class="rooms-grid"></div>
+  </div>
+</section>
+
+<section id="amenities" class="section dark">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-title">
+      <span class="eyebrow">Hotel Features</span>
+      <h2 style="color:white;">Amenities &amp; Services</h2>
+      <div class="stars">★ ★ ★ ★</div>
+    </div>
+    <div id="amenitiesGrid" class="amenities-grid"></div>
+  </div>
+</section>
+
+<section id="dining" class="section">
+  <div class="split">
+    <div>
+      <div class="section-title" style="text-align:left;margin-bottom:24px;">
+        <span class="eyebrow">Dining</span>
+        <h2>Flavours That Linger</h2>
+      </div>
+      <p id="diningText">Loading…</p>
+    </div>
+    <div id="diningImgWrap" class="img-placeholder">Restaurant</div>
+  </div>
+</section>
+
+<section id="contact" class="section cream">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-title">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Contact Us</h2>
+      <div class="stars">★ ★ ★ ★</div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Whether you have questions about reservations, need special accommodations, or simply want to plan an unforgettable stay — our team is here to help.</p>
+        <div class="item"><div class="ico">📞</div><div><small>Reservations</small><strong id="cPhone">—</strong><div id="cPhone2" style="margin-top:4px;font-size:15px;color:#4a5258;"></div></div></div>
+        <div class="item"><div class="ico">✉</div><div><small>Email</small><strong id="cEmail">—</strong></div></div>
+        <div class="item"><div class="ico">📍</div><div><small>Address</small><strong id="cAddr">—</strong></div></div>
+      </div>
+      <div class="book-form" id="contactForm">
+        <h3>Request a Booking</h3>
+        <p class="sub">Fill in your details and we'll confirm your stay shortly.</p>
+        <form id="bookForm" data-form="inline" novalidate>
+          <!-- Form fields are rendered dynamically -->
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo" id="footLogo">The Dream Residency</div>
+  <div class="foot-info"><span id="footAddr"></span></div>
+  <div class="foot-info">
+    <span id="footPhone"></span> &nbsp;|&nbsp; <span id="footEmail"></span>
+  </div>
+  <div class="copy">&copy; <span id="year"></span> <span id="footBrand">The Dream Residency</span>. All rights reserved.</div>
+</footer>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="bookModal" onclick="if(event.target===this)closeBookingModal()">
+  <div class="modal">
+    <button class="close" onclick="closeBookingModal()">&times;</button>
+    <div class="modal-head">
+      <h3>Request a Booking</h3>
+      <p>We'll confirm availability and contact you shortly.</p>
+    </div>
+    <div class="modal-body">
+      <div class="book-form book-form--modal">
+        <form id="bookFormModal" data-form="modal" novalidate>
+          <!-- Form fields are rendered dynamically -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Room "Read More" Modal -->
+<div class="modal-overlay" id="roomModal" onclick="if(event.target===this)closeRoomModal()">
+  <div class="modal" style="max-width:680px;">
+    <button class="close" onclick="closeRoomModal()">&times;</button>
+    <div id="roomModalBody"></div>
+  </div>
+</div>
+
+<!-- Animated Success Overlay (shown after a booking request is sent) -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-check">
+      <svg viewBox="0 0 80 80" width="80" height="80">
+        <circle class="success-circle" cx="40" cy="40" r="36" fill="none" stroke="#16a34a" stroke-width="4"/>
+        <path class="success-tick" d="M24 42 L36 54 L58 30" fill="none" stroke="#16a34a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>Thank You!</h2>
+    <p class="success-name" id="successName"></p>
+    <p class="success-msg">Your booking request has been received.<br>Welcome to <strong>The Dream Residency</strong> — our team will contact you shortly to confirm your stay.</p>
+    <button class="cta-success" onclick="closeSuccess()">Close</button>
+  </div>
+</div>
+
+<script>
+// ---------- Country codes (with national-significant-number length) ----------
+const COUNTRIES = [
+  { code:'+91',  name:'India',          flag:'🇮🇳', len:10 },
+  { code:'+971', name:'UAE',            flag:'🇦🇪', len:9  },
+  { code:'+1',   name:'USA / Canada',   flag:'🇺🇸', len:10 },
+  { code:'+44',  name:'UK',             flag:'🇬🇧', len:10 },
+  { code:'+61',  name:'Australia',      flag:'🇦🇺', len:9  },
+  { code:'+65',  name:'Singapore',      flag:'🇸🇬', len:8  },
+  { code:'+966', name:'Saudi Arabia',   flag:'🇸🇦', len:9  },
+  { code:'+974', name:'Qatar',          flag:'🇶🇦', len:8  },
+  { code:'+973', name:'Bahrain',        flag:'🇧🇭', len:8  },
+  { code:'+968', name:'Oman',           flag:'🇴🇲', len:8  },
+  { code:'+60',  name:'Malaysia',       flag:'🇲🇾', len:9, len2:10 },
+  { code:'+92',  name:'Pakistan',       flag:'🇵🇰', len:10 },
+  { code:'+880', name:'Bangladesh',     flag:'🇧🇩', len:10 },
+  { code:'+94',  name:'Sri Lanka',      flag:'🇱🇰', len:9  },
+  { code:'+977', name:'Nepal',          flag:'🇳🇵', len:10 },
+  { code:'+49',  name:'Germany',        flag:'🇩🇪', len:10, len2:11 },
+  { code:'+33',  name:'France',         flag:'🇫🇷', len:9  },
+  { code:'+39',  name:'Italy',          flag:'🇮🇹', len:9, len2:10 },
+  { code:'+34',  name:'Spain',          flag:'🇪🇸', len:9  },
+  { code:'+31',  name:'Netherlands',    flag:'🇳🇱', len:9  },
+  { code:'+81',  name:'Japan',          flag:'🇯🇵', len:10 },
+  { code:'+86',  name:'China',          flag:'🇨🇳', len:11 },
+  { code:'+27',  name:'South Africa',   flag:'🇿🇦', len:9  }
+];
+function countryByCode(c) { return COUNTRIES.find(x => x.code === c) || COUNTRIES[0]; }
+
+const AMENITY_ICONS = {
+  'wifi':'📶','wi-fi':'📶','room service':'🛎','restaurant':'🍽','power backup':'🔋','parking':'🅿','laundry':'🧺','travel desk':'🧭','conference':'🏢','conference hall':'🏢','spa':'💆','pool':'🏊','gym':'🏋','ac':'❄','air conditioning':'❄','breakfast':'🍳','bar':'🍷','tv':'📺'
+};
+function iconFor(name) {
+  const k = name.trim().toLowerCase();
+  for (const key in AMENITY_ICONS) if (k.includes(key)) return AMENITY_ICONS[key];
+  return '✦';
+}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+let CONTENT = {}, ROOM_TYPES = [];
+
+async function load() {
+  CONTENT = await fetch('/api/content').then(r => r.json());
+  ROOM_TYPES = await fetch('/api/room-types').then(r => r.json());
+
+  document.title = CONTENT.hotel_name || 'The Dream Residency';
+  document.getElementById('logoName').textContent = CONTENT.hotel_name;
+  document.getElementById('footLogo').textContent = CONTENT.hotel_name;
+  document.getElementById('footBrand').textContent = CONTENT.hotel_name;
+  document.getElementById('heroTitle').textContent = CONTENT.hotel_name;
+  document.getElementById('heroTag').textContent = CONTENT.tagline;
+  document.getElementById('aboutText').textContent = CONTENT.about;
+  document.getElementById('diningText').textContent = CONTENT.dining_text || '';
+  document.getElementById('cPhone').textContent = CONTENT.phone;
+  document.getElementById('cPhone2').textContent = CONTENT.phone2 || '';
+  document.getElementById('cEmail').textContent = CONTENT.email;
+  document.getElementById('cAddr').textContent = CONTENT.address;
+  document.getElementById('footAddr').textContent = CONTENT.address;
+  document.getElementById('footPhone').textContent = CONTENT.phone;
+  document.getElementById('footEmail').textContent = CONTENT.email;
+
+  if (CONTENT.hero_image) document.getElementById('heroBg').style.backgroundImage = `url('${CONTENT.hero_image}')`;
+  if (CONTENT.about_image) {
+    const w = document.getElementById('aboutImgWrap');
+    w.outerHTML = `<img src="${CONTENT.about_image}" alt="About" />`;
+  }
+  if (CONTENT.dining_image) {
+    const w = document.getElementById('diningImgWrap');
+    w.outerHTML = `<img src="${CONTENT.dining_image}" alt="Dining" />`;
+  }
+
+  // Amenities
+  const amenities = (CONTENT.amenities || '').split(',').map(s => s.trim()).filter(Boolean);
+  document.getElementById('amenitiesGrid').innerHTML = amenities.map(a =>
+    `<div class="amenity"><div class="ico">${iconFor(a)}</div><div class="name">${escapeHtml(a)}</div></div>`
+  ).join('') || '<p style="color:#aaa;text-align:center;grid-column:1/-1;">Amenities coming soon.</p>';
+
+  // Rooms — show only the fixed Room Types (Suite, Deluxe, Twin Bed) — no prices, no internal numbers
+  const grid = document.getElementById('roomsGrid');
+  if (!ROOM_TYPES.length) {
+    grid.innerHTML = '<p class="muted" style="grid-column:1/-1;text-align:center;">Rooms coming soon.</p>';
+  } else {
+    grid.innerHTML = ROOM_TYPES.map((rt, i) => `
+      <div class="room-card">
+        <div class="room-img">${rt.image
+          ? `<img src="${escapeHtml(rt.image)}" alt="${escapeHtml(rt.name)}" />`
+          : escapeHtml(rt.name)}</div>
+        <div class="room-body">
+          <div class="cat">Room Type</div>
+          <h3>${escapeHtml(rt.name)}</h3>
+          <p>${escapeHtml(rt.short_desc || '')}</p>
+          <div style="display:flex;gap:10px;margin-top:18px;">
+            <button class="book-btn" onclick="openBookingModal('${escapeHtml(rt.name).replace(/'/g, "&#39;")}')">Request Booking</button>
+            <button class="read-more-btn" onclick="openRoomModal(${i})">Read More</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  // Render booking forms
+  renderBookingForm('bookForm');
+  renderBookingForm('bookFormModal');
+}
+
+// ---------- Read More Modal ----------
+function openRoomModal(idx) {
+  const rt = ROOM_TYPES[idx];
+  if (!rt) return;
+  const features = (Array.isArray(rt.features) ? rt.features : String(rt.features || '').split(/\r?\n|,/)).map(s => String(s).trim()).filter(Boolean);
+  document.getElementById('roomModalBody').innerHTML = `
+    <div class="room-modal-img">
+      ${rt.image
+        ? `<img src="${escapeHtml(rt.image)}" alt="${escapeHtml(rt.name)}" />`
+        : `<div class="img-placeholder" style="height:280px;">${escapeHtml(rt.name)}</div>`}
+    </div>
+    <div style="padding:28px 32px 32px;">
+      <div class="cat" style="color:var(--gold-2);letter-spacing:2px;font-size:11px;font-family:-apple-system,sans-serif;text-transform:uppercase;font-weight:700;">Room Type</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:30px;font-weight:500;margin:6px 0 14px;">${escapeHtml(rt.name)}</h2>
+      <p style="font-size:16px;line-height:1.7;color:#4a5258;font-family:-apple-system,sans-serif;">${escapeHtml(rt.description || '')}</p>
+      ${features.length ? `
+        <h4 style="font-family:-apple-system,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin:24px 0 12px;">Room Features</h4>
+        <ul class="feature-list">
+          ${features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
+        </ul>
+      ` : ''}
+      <button class="cta" style="width:100%;margin-top:20px;border:none;" onclick="closeRoomModal();openBookingModal('${escapeHtml(rt.name).replace(/'/g, "&#39;")}')">Request Booking for ${escapeHtml(rt.name)}</button>
+    </div>
+  `;
+  document.getElementById('roomModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeRoomModal() {
+  document.getElementById('roomModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ---------- Dynamic Booking Form ----------
+function renderBookingForm(formId) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+  const ns = formId; // namespace for ids
+  const today = new Date().toISOString().slice(0, 10);
+  const defaultCountry = COUNTRIES[0];
+
+  const roomTypeOptions = '<option value="">Any</option>' +
+    ROOM_TYPES.map(rt => `<option value="${escapeHtml(rt.name)}">${escapeHtml(rt.name)}</option>`).join('');
+
+  form.innerHTML = `
+    <div class="row">
+      <label><span>Full Name *</span><input name="primary_name" required /></label>
+      <label><span>Phone *</span>
+        <div class="phone-input">
+          <select class="cc" data-cc>
+            ${COUNTRIES.map(c => `<option value="${c.code}" data-len="${c.len}" data-len2="${c.len2||c.len}" title="${c.name}" ${c.code===defaultCountry.code?'selected':''}>${c.flag} ${c.code}</option>`).join('')}
+          </select>
+          <input class="phone-num" name="phone" inputmode="numeric" pattern="[0-9]*" required maxlength="${defaultCountry.len2||defaultCountry.len}" placeholder="${defaultCountry.len} digits" />
+        </div>
+        <small class="phone-hint" data-hint>Enter ${defaultCountry.len} digit number for ${defaultCountry.name}.</small>
+      </label>
+    </div>
+    <div class="row">
+      <label><span>Email</span><input name="email" type="email" /></label>
+      <label><span>Guests *</span>
+        <div class="qty-stepper" data-stepper="guests" data-min="1" data-max="8">
+          <button type="button" data-step="-1" aria-label="Decrease guests">−</button>
+          <input type="text" name="guests" value="2" readonly aria-live="polite" />
+          <button type="button" data-step="1" aria-label="Increase guests">+</button>
+        </div>
+      </label>
+    </div>
+    <div class="row row-single" data-rooms-row style="display:none;">
+      <label><span>Rooms Required *</span>
+        <div class="qty-stepper" data-stepper="rooms_required" data-min="1" data-max="4">
+          <button type="button" data-step="-1" aria-label="Decrease rooms">−</button>
+          <input type="text" name="rooms_required" value="1" readonly aria-live="polite" />
+          <button type="button" data-step="1" aria-label="Increase rooms">+</button>
+        </div>
+      </label>
+    </div>
+    <div class="row">
+      <label><span>Check In *</span><input name="check_in" type="date" required min="${today}" /></label>
+      <label><span>Check Out *</span><input name="check_out" type="date" required min="${today}" /></label>
+    </div>
+    <label style="display:block;margin-bottom:14px;"><span>Room Type</span>
+      <select name="room_type" data-room-type>${roomTypeOptions}</select>
+    </label>
+
+    <div class="guests-section">
+      <div class="guests-head">
+        <strong>Guest Details</strong>
+        <small class="muted">The first entry is the primary guest. Add details for every guest.</small>
+      </div>
+      <div class="guests-list" data-guests></div>
+    </div>
+
+    <label style="display:block;margin-bottom:14px;"><span>Message</span><textarea name="message" rows="3" placeholder="Special requests, arrival time, etc."></textarea></label>
+    <button class="submit-btn" type="submit">Send Booking Request</button>
+    <div class="form-msg" data-msg></div>
+  `;
+
+  // ----- Behaviour wiring -----
+  const ccSel = form.querySelector('[data-cc]');
+  const phoneNum = form.querySelector('.phone-num');
+  const phoneHint = form.querySelector('[data-hint]');
+  const guestsSel = form.querySelector('input[name="guests"]');           // now a stepper input
+  const roomsRow = form.querySelector('[data-rooms-row]');
+  const roomsSel = form.querySelector('input[name="rooms_required"]');    // now a stepper input
+  const ciInput = form.querySelector('input[name="check_in"]');
+  const coInput = form.querySelector('input[name="check_out"]');
+  const guestsList = form.querySelector('[data-guests]');
+  const primaryName = form.querySelector('input[name="primary_name"]');
+  const msgEl = form.querySelector('[data-msg]');
+
+  // ---- Quantity stepper wiring (+/-) ----
+  function setStepperValue(input, val) {
+    const wrap = input.closest('.qty-stepper');
+    const min = parseInt(wrap.dataset.min) || 1;
+    const max = parseInt(wrap.dataset.max) || 99;
+    const v = Math.max(min, Math.min(max, parseInt(val) || min));
+    input.value = v;
+    wrap.querySelector('[data-step="-1"]').disabled = v <= min;
+    wrap.querySelector('[data-step="1"]').disabled = v >= max;
+    return v;
+  }
+  form.querySelectorAll('.qty-stepper').forEach(wrap => {
+    const input = wrap.querySelector('input');
+    setStepperValue(input, input.value);
+    wrap.querySelectorAll('button[data-step]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = parseInt(btn.dataset.step) || 0;
+        setStepperValue(input, (parseInt(input.value) || 0) + step);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+  });
+
+  function updatePhoneRules() {
+    const opt = ccSel.selectedOptions[0];
+    const len = parseInt(opt.dataset.len) || 10;
+    const len2 = parseInt(opt.dataset.len2) || len;
+    phoneNum.maxLength = len2;
+    phoneNum.placeholder = len === len2 ? `${len} digits` : `${len}–${len2} digits`;
+    phoneHint.textContent = len === len2
+      ? `Enter ${len} digit number for ${opt.text.split(' ').slice(2).join(' ')}.`
+      : `Enter ${len}–${len2} digits for ${opt.text.split(' ').slice(2).join(' ')}.`;
+    validatePhone();
+  }
+  function validatePhone() {
+    const v = phoneNum.value.replace(/\D/g, '');
+    phoneNum.value = v;
+    const opt = ccSel.selectedOptions[0];
+    const len = parseInt(opt.dataset.len) || 10;
+    const len2 = parseInt(opt.dataset.len2) || len;
+    if (v.length === 0) { phoneNum.setCustomValidity(''); return; }
+    if (v.length < len || v.length > len2) {
+      phoneNum.setCustomValidity(`Phone must be ${len === len2 ? len : len + '-' + len2} digits for the selected country.`);
+    } else {
+      phoneNum.setCustomValidity('');
+    }
+  }
+  ccSel.addEventListener('change', updatePhoneRules);
+  phoneNum.addEventListener('input', validatePhone);
+  // Block non-numeric typing entirely
+  phoneNum.addEventListener('keypress', (e) => {
+    if (!/[0-9]/.test(e.key)) e.preventDefault();
+  });
+
+  function renderGuestRows() {
+    const n = parseInt(guestsSel.value) || 1;
+    // Show "rooms required" if guests > 2
+    roomsRow.style.display = n > 2 ? '' : 'none';
+    if (n <= 2) setStepperValue(roomsSel, 1);
+    // Build / preserve guest rows
+    const existing = Array.from(guestsList.querySelectorAll('.guest-row')).map(r => ({
+      name: r.querySelector('.g-name').value,
+      age:  r.querySelector('.g-age').value
+    }));
+    guestsList.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+      const data = existing[i] || {};
+      // For the primary guest, prefill name from the top "Full Name" field
+      const isPrimary = i === 0;
+      const defaultName = isPrimary ? (primaryName.value || data.name || '') : (data.name || '');
+      const row = document.createElement('div');
+      row.className = 'guest-row';
+      row.innerHTML = `
+        <div class="guest-row-head">${isPrimary ? '★ Primary Guest' : 'Guest ' + (i+1)}</div>
+        <div class="guest-row-fields">
+          <label><span>Name *</span><input class="g-name" required value="${escapeHtml(defaultName)}" ${isPrimary ? 'data-primary' : ''} /></label>
+          <label><span>Age</span><input class="g-age" type="number" min="0" max="120" value="${escapeHtml(data.age||'')}" /></label>
+        </div>
+      `;
+      guestsList.appendChild(row);
+    }
+    // Sync primary name field with the first guest row
+    const primaryGuestInput = guestsList.querySelector('.g-name');
+    if (primaryGuestInput) {
+      primaryGuestInput.addEventListener('input', () => { primaryName.value = primaryGuestInput.value; });
+    }
+  }
+  primaryName.addEventListener('input', () => {
+    const first = guestsList.querySelector('.g-name');
+    if (first) first.value = primaryName.value;
+  });
+  guestsSel.addEventListener('change', renderGuestRows);
+
+  // Date validation: future-only + check-out > check-in
+  ciInput.addEventListener('change', () => {
+    if (ciInput.value && ciInput.value < today) ciInput.value = today;
+    if (ciInput.value) coInput.min = ciInput.value;
+    if (coInput.value && coInput.value <= ciInput.value) coInput.value = '';
+  });
+  coInput.addEventListener('change', () => {
+    if (ciInput.value && coInput.value <= ciInput.value) {
+      coInput.setCustomValidity('Check-out must be after check-in.');
+    } else { coInput.setCustomValidity(''); }
+  });
+
+  // Init
+  updatePhoneRules();
+  renderGuestRows();
+
+  // Submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msgEl.innerHTML = '';
+
+    // Validate phone
+    validatePhone();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Collect guests (ID details are collected at check-in, not at booking request)
+    const guestsData = Array.from(guestsList.querySelectorAll('.guest-row')).map((r, i) => ({
+      index: i,
+      name: r.querySelector('.g-name').value.trim(),
+      age:  r.querySelector('.g-age').value || null
+    }));
+    if (!guestsData[0] || !guestsData[0].name) {
+      msgEl.innerHTML = `<div class="err">Primary guest name is required.</div>`;
+      return;
+    }
+
+    const payload = {
+      name: guestsData[0].name,
+      country_code: ccSel.value,
+      phone: phoneNum.value,
+      email: form.querySelector('input[name="email"]').value,
+      guests: parseInt(guestsSel.value) || 1,
+      rooms_required: parseInt(roomsSel.value) || 1,
+      check_in: ciInput.value,
+      check_out: coInput.value,
+      room_type: form.querySelector('[data-room-type]').value,
+      message: form.querySelector('textarea[name="message"]').value,
+      guest_details: guestsData
+    };
+
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    try {
+      const r = await fetch('/api/request-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const j = await r.json();
+      if (r.ok) {
+        form.reset();
+        renderGuestRows();
+        if (formId === 'bookFormModal') closeBookingModal();
+        showSuccess(payload.name);
+      } else {
+        msgEl.innerHTML = `<div class="err">${j.error || 'Failed to send. Please try again.'}</div>`;
+      }
+    } catch (err) {
+      msgEl.innerHTML = `<div class="err">Network error. Please try again.</div>`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Booking Request';
+    }
+  });
+}
+
+// ---------- Modals ----------
+function openBookingModal(roomType) {
+  document.getElementById('bookModal').classList.add('open');
+  if (roomType) {
+    const sel = document.querySelector('#bookFormModal [data-room-type]');
+    if (sel) sel.value = roomType;
+  }
+  document.body.style.overflow = 'hidden';
+}
+// Auto-open booking modal via URL: ?book=1 (or hash #book)
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  if (params.get('book') === '1' || location.hash === '#book') {
+    setTimeout(() => openBookingModal(), 60);
+  }
+});
+function closeBookingModal() {
+  document.getElementById('bookModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showSuccess(name) {
+  document.getElementById('successName').textContent = name ? `Dear ${name},` : '';
+  const el = document.getElementById('successOverlay');
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSuccess() {
+  document.getElementById('successOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close menu on link click (mobile)
+document.querySelectorAll('#navLinks a').forEach(a => a.onclick = () => document.getElementById('navLinks').classList.remove('open'));
+
+// Visitor tracking
+fetch('/api/track', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ path: location.pathname + location.search, referrer: document.referrer }) }).catch(()=>{});
+
+load();
+</script>
+</body>
+</html>

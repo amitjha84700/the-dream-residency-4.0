@@ -301,7 +301,51 @@ function closeRoomModal() {
   document.getElementById('roomModal').classList.remove('open');
   document.body.style.overflow = '';
 }
+  // copywrite footer 
+  <!-- FOOTER START -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>© 2026 Dream Residency. All Rights Reserved.</p>
+    <p>
+      Website designed by 
+      <a href="mailto:webhub.tech.studio@gmail.com">
+        webhub.tech.studio@gmail.com
+      </a>
+    </p>
+  </div>
+</footer>
 
+<style>
+.footer {
+  background: #0f0f0f;
+  color: #ffffff;
+  text-align: center;
+  padding: 25px 15px;
+  margin-top: 40px;
+  border-top: 2px solid #222;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content p {
+  margin: 8px 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.footer a {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #00bcd4;
+}
+</style>
+<!-- FOOTER END -->
+// copywrite footer
 // ---------- Dynamic Booking Form ----------
 function renderBookingForm(formId) {
   const form = document.getElementById(formId);
